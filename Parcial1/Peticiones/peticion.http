@@ -66,4 +66,19 @@ Content-Type: application/json
   "status": "available"
 }
 
+### Consulta 11: Actualizar un usuario (PUT)
+PUT https://dummyjson.com/users/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName": "Carlos",
+  "lastName": "Ramírez",
+  "age": 30,
+  "gender": "Male",
+  "email": "carlos.ramirez@example.com"
+}
+
+### Consulta 12: Eliminar un usuario (DELETE)
+DELETE https://dummyjson.com/users/1 HTTP/1.1
+
 ### ruta backup C:\Users\ACER\AppData\Roaming\Code\User\globalStorage\anweber.vscode-httpyac\.httpyac 
