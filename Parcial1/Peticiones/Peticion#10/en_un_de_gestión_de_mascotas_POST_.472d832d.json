@@ -1,0 +1,11 @@
+{
+  "id": 12345,
+  "category": {
+    "id": 1,
+    "name": "Perro"
+  },
+  "name": "Firulais",
+  "photoUrls": [],
+  "tags": [],
+  "status": "available"
+}
