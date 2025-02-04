@@ -3,13 +3,12 @@ const app = express();
 const port = 3000;
 
 app.get('/', (req, res) => {
-    res.send(__dirname + '/public/index.html');
-    next();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.sendFile( __dirname + '/public/index.html');
     });
 
 app.post('/', (req, res) => {
     res.send('Got a POST request');
-    next();
     });
 
 app.listen(port, () => {
