@@ -10,6 +10,22 @@ app.use('/',(req, res, next) => {
     next();
     });
 
+app.get('/Alumnos', (req, res) => {
+    console.log(req.query);
+    res.sendFile( __dirname + '/public/index.html');
+    });
+
+app.post('/sistemas/:control', (req, res) => {
+    console.log(req.params);
+    res.send('Got a POST request');
+});
+
+
+app.patch('/maestros', (req, res) => {
+    console.log(req.body);
+    res.send('Got a PATCH request');
+});
+
 //Middleware incorporado en express
 app.use(express.json());
 
