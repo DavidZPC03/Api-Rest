@@ -1,4 +1,3 @@
-// updateEmpleadoController.js
 const db = require('../db'); // Importar la base de datos
 
 const updateEmpleado = (req, res) => {

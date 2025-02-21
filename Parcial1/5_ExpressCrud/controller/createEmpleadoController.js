@@ -1,5 +1,4 @@
-// createEmpleadoController.js
-const db = require('../db'); // Importar la base de datos
+const db = require('../db'); 
 
 const createEmpleado = (req, res) => {
     const { nombre, edad, pais, cargo, anios } = req.body;
