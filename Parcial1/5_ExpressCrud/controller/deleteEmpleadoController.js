@@ -15,14 +15,18 @@ const deleteEmpleado = (req, res) => {
                 if (err) {
                     res.status(500).json({ message: "Error al eliminar el empleado" });
                 } else {
-                    res.json({ message: "Empleado eliminado con éxito" });
+                    res.json({
+                        message: "Empleado eliminado con éxito",
+                        links: [
+                            { rel: "all", method: "GET", href: "/empleados" },
+                            { rel: "create", method: "POST", href: "/empleados" }
+                        ]
+                    });
                 }
             }
         );
     } catch (error) {
-        res.status(400).json({
-            message: error.message,
-        });
+        res.status(400).json({ message: error.message });
     }
 };
 

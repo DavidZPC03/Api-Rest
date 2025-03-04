@@ -10,7 +10,18 @@ const createEmpleado = (req, res) => {
             if (err) {
                 return res.status(500).json({ message: "Error al insertar el empleado" });
             } else {
-                return res.status(201).json({ message: "Empleado creado con éxito" });
+                const newEmpleadoId = result.insertId; // ID del empleado creado
+
+                const response = {
+                    message: "Empleado creado con éxito",
+                    links: [
+                        { rel: "self", method: "GET", href: `/empleados/${newEmpleadoId}` },
+                        { rel: "update", method: "PUT", href: `/empleados/${newEmpleadoId}` },
+                        { rel: "delete", method: "DELETE", href: `/empleados/${newEmpleadoId}` }
+                    ]
+                };
+
+                return res.status(201).json(response);
             }
         }
     );
