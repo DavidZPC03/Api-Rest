@@ -2,22 +2,32 @@ const db = require('../db');
 
 const getEmpleados = (req, res) => {
     try {
-        db.query("SELECT * FROM empleados", (err, result) => {
+        db.query("SELECT * FROM empleados", (err, results) => {
             if (err) {
                 return res.status(500).json({ message: "Error al obtener empleados" });
-            } else {
-                // Agregar enlaces HATEOAS a cada empleado
-                const empleados = result.map(empleado => ({
-                    ...empleado,
-                    links: [
-                        { rel: "self", method: "GET", href: `/empleados/${empleado.id}` },
-                        { rel: "update", method: "PUT", href: `/empleados/${empleado.id}` },
-                        { rel: "delete", method: "DELETE", href: `/empleados/${empleado.id}` }
-                    ]
-                }));
-
-                res.json(empleados);
             }
+            const empleadosConLinks = results.map(emp => ({
+                ...emp,
+                _links: {
+                    self: { href: `/empleados/${emp.id}`, method: "GET" },
+                    update: { href: `/empleados/${emp.id}`, method: "PUT" },
+                    delete: { href: `/empleados/${emp.id}`, method: "DELETE" }
+                },
+                _embedded: {
+                    [`empleado_${emp.id}`]: {
+                        descripcion: `Información sobre el empleado "${emp.nombre}"`,
+                        ejemploJSON: {
+                            id: emp.id,
+                            nombre: emp.nombre,
+                            edad: emp.edad,
+                            cargo: emp.cargo,
+                            anios: emp.anios
+                        }
+                    }
+                }
+            }));
+
+            res.json(empleadosConLinks);
         });
     } catch (error) {
         res.status(500).json({ message: "Error inesperado" });
