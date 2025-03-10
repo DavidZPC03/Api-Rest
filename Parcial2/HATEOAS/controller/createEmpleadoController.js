@@ -8,7 +8,7 @@ const createEmpleado = (req, res) => {
         [nombre, edad, pais, cargo, anios],
         (err, result) => {
             if (err) {
-                return res.status(500).json({ message: "Error al insertar el empleado" });
+                next(err);
             }
 
             const nuevoEmpleado = {

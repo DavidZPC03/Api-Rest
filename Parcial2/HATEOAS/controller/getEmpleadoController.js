@@ -30,7 +30,7 @@ const getEmpleados = (req, res) => {
             res.json(empleadosConLinks);
         });
     } catch (error) {
-        res.status(500).json({ message: "Error inesperado" });
+        next(error);
     }
 };
 

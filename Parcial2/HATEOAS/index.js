@@ -11,6 +11,10 @@ app.use(express.json());
 
 app.use('/empleados', empleadosRouter);
 
+app.use((err, req, res, next) => {
+    res.status(500).json({ message: err.message });
+}, router);
+
 app.listen(3001, () => {
     console.log("Server is running on port 3001");
 });

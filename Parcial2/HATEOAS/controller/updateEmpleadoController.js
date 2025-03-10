@@ -8,7 +8,7 @@ const updateEmpleado = (req, res) => {
         [nombre, edad, pais, cargo, anios, id],
         (err, result) => {
             if (err) {
-                return res.status(500).json({ message: "Error al actualizar el empleado" });
+                next(err);
             }
 
             const empleadoActualizado = {
