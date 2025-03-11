@@ -1,6 +1,7 @@
 const db = require('../db');
+const logger = require('../utils/logger');
 
-const updateEmpleado = (req, res) => {
+const updateEmpleado = (req, res, next) => {
     const { id, nombre, edad, pais, cargo, anios } = req.body;
 
     db.query(
@@ -8,7 +9,8 @@ const updateEmpleado = (req, res) => {
         [nombre, edad, pais, cargo, anios, id],
         (err, result) => {
             if (err) {
-                next(err);
+                logger.error(`Error al actualizar empleado ${id}: ${err.message}`, { stack: err.stack });
+                return next(err);
             }
 
             const empleadoActualizado = {

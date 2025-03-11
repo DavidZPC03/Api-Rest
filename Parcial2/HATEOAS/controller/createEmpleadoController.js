@@ -1,6 +1,7 @@
 const db = require('../db');
+const logger = require('../utils/logger');
 
-const createEmpleado = (req, res) => {
+const createEmpleado = (req, res, next) => {
     const { nombre, edad, pais, cargo, anios } = req.body;
 
     db.query(
@@ -8,7 +9,8 @@ const createEmpleado = (req, res) => {
         [nombre, edad, pais, cargo, anios],
         (err, result) => {
             if (err) {
-                next(err);
+                logger.error(`Error al crear empleado: ${err.message}`, { stack: err.stack });
+                return next(err);
             }
 
             const nuevoEmpleado = {
@@ -36,6 +38,7 @@ const createEmpleado = (req, res) => {
                     }
                 }
             };
+
             res.status(201).json(nuevoEmpleado);
         }
     );

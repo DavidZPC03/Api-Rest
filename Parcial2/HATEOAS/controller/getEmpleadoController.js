@@ -1,9 +1,11 @@
 const db = require('../db');
+const logger = require('../utils/logger');
 
-const getEmpleados = (req, res) => {
+const getEmpleados = (req, res, next) => {
     try {
         db.query("SELECT * FROM empleados", (err, results) => {
             if (err) {
+                logger.error(`Error al obtener empleados: ${err.message}`, { stack: err.stack });
                 return res.status(500).json({ message: "Error al obtener empleados" });
             }
             const empleadosConLinks = results.map(emp => ({
@@ -16,13 +18,7 @@ const getEmpleados = (req, res) => {
                 _embedded: {
                     [`empleado_${emp.id}`]: {
                         descripcion: `Información sobre el empleado "${emp.nombre}"`,
-                        ejemploJSON: {
-                            id: emp.id,
-                            nombre: emp.nombre,
-                            edad: emp.edad,
-                            cargo: emp.cargo,
-                            anios: emp.anios
-                        }
+                        ejemploJSON: emp
                     }
                 }
             }));
@@ -30,6 +26,7 @@ const getEmpleados = (req, res) => {
             res.json(empleadosConLinks);
         });
     } catch (error) {
+        logger.error(`Error inesperado: ${error.message}`, { stack: error.stack });
         next(error);
     }
 };
