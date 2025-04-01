@@ -4,12 +4,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "jsdoc": "jsdoc Parcial2/jsdoc/Jsdoc.json -d Parcial2/jsdoc/docs"
+    "jsdoc": "jsdoc Parcial2/jsdoc/Jsdoc.json -d Parcial2/jsdoc/docs",
+    "doc": "jsdoc c jsdoc.json -d-readme ./README.md"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "clean-jsdoc-theme": "^4.3.0",
     "express": "^5.1.0",
     "jsdoc": "^4.0.4"
   }
