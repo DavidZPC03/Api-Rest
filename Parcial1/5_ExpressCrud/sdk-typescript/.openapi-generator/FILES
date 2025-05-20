@@ -1,0 +1,14 @@
+.gitignore
+.npmignore
+.openapi-generator-ignore
+api.ts
+base.ts
+common.ts
+configuration.ts
+docs/Empleado.md
+docs/EmpleadoDelete.md
+docs/EmpleadoInput.md
+docs/EmpleadoUpdate.md
+docs/EmpleadosApi.md
+git_push.sh
+index.ts
